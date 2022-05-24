@@ -4,6 +4,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'abel': ['Abel', 'sans-serif']
+      },
       colors: {
         primary: "var(--primary)",
         secondary: "var(--secondary)",

@@ -12,3 +12,12 @@
   --main: #0d0106;
   --header: #2d3748;
 }
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+@layer base {
+  html {
+    font-family: Abel, system-ui, sans-serif; /* change the default font */
+  }
+}
