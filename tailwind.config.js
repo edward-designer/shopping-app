@@ -23,6 +23,10 @@ module.exports = {
         addVariant('child-hover', '&:hover > *');
         addVariant('childAll', '& *');
         addVariant('childAll-hover', '&:hover *');
+        addVariant('hamburger-checked-1st', 'input[type="checkbox"]:checked ~ div span:first-child');
+        addVariant('hamburger-checked-2nd', 'input[type="checkbox"]:checked ~ div span:nth-child(2)');
+        addVariant('hamburger-checked-3rd', 'input[type="checkbox"]:checked ~ div span:last-child');
+        addVariant('menu-checked', 'input[type="checkbox"]:checked ~ nav');
     }
   ],  
 }
