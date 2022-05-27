@@ -1,7 +1,8 @@
-//import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 //import { getRedirectResult } from 'firebase/auth';
 import SignUpForm from "../components/sign-up-form-component";
 import SignInForm from "../components/sign-in-form-component";
+import { MessageContext } from "../contexts/message-context";
 
 const Authentication = () => {
     /*useEffect(() => {async function fetchResult(){
@@ -9,11 +10,12 @@ const Authentication = () => {
         console.log(response);
         } fetchResult();
     },[]);*/
+    const { setMessage,setShowMessage } = useContext(MessageContext);
 
     return (
         <div className="flex flex-wrap justify-around ">
-            <SignInForm />
-            <SignUpForm />
+            <SignInForm setMessage={setMessage} setShowMessage={setShowMessage} />
+            <SignUpForm setMessage={setMessage} setShowMessage={setShowMessage} />
         </div>
     );
 }

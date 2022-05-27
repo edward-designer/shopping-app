@@ -1,19 +1,24 @@
 import { useState } from 'react';
 import { auth, signInWithGooglePopup, createUserDoccumentFromAuth, signInUserWithEmailAndPassword } from "../utiles/firebase.utils";
 import FormInput from './form-input-component';
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFieldsSignIn = {
     email1: '',
     password1: '',
 }
 
-const SignInForm = () => {
+const SignInForm = ({ setMessage,setShowMessage }) => {
     const [formFieldsSignIn,setFormFieldsSignIn] = useState(defaultFormFieldsSignIn);
     const {email1,password1} = formFieldsSignIn;
+    const navigate = useNavigate();
 
     const logGoogleUser = async() => {
         try{
             await signInWithGooglePopup();
+            setMessage('Signed in, start shopping now!');
+            setShowMessage(true);
+            navigate("/");
         }catch(e){
             console.log(e);
         }
@@ -33,7 +38,9 @@ const SignInForm = () => {
         try{
             const { user }  = await signInUserWithEmailAndPassword(email1, password1);
             event.target.reset(); // can't figure out why reset is needed
-            resetForm();
+            setMessage('Signed in, start shopping now!');
+            setShowMessage(true);
+            navigate("/");
         }catch(e){
             // eslint-disable-next-line default-case
             switch(e.code){

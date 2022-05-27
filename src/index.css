@@ -21,3 +21,7 @@
     font-family: Abel, system-ui, sans-serif; /* change the default font */
   }
 }
+
+.active {
+  @apply text-accent;
+}

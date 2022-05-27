@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createAuthUserWithEmailAndPassword,createUserDoccumentFromAuth } from '../utiles/firebase.utils';
 import FormInput from './form-input-component';
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
     displayName: '',
@@ -9,9 +10,10 @@ const defaultFormFields = {
     confirmPassword: ''
 }
 
-const SignUpForm = () => {
+const SignUpForm = ({ setMessage,setShowMessage }) => {
     const [formFields,setFormFields] = useState(defaultFormFields);
     const {displayName,email,password,confirmPassword} = formFields;
+    const navigate = useNavigate();
 
     const resetForm = () => {
         setFormFields(defaultFormFields);
@@ -29,8 +31,11 @@ const SignUpForm = () => {
         try{
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
             const userDocRef = await createUserDoccumentFromAuth(user,{displayName});
+            setMessage('Great! You are in. Start shopping now!');
+            setShowMessage(true);
             event.target.reset();
             resetForm();
+            navigate("/");
         }catch(e){
             switch(e.code){
                 case "auth/wrong-password":
