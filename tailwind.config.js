@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}","./node_modules/tw-elements/dist/js/**/*.js"
   ],
   theme: {
     extend: {
@@ -28,6 +28,7 @@ module.exports = {
         addVariant('hamburger-checked-3rd', 'input[type="checkbox"]:checked ~ div span:last-child');
         addVariant('menu-checked', 'input[type="checkbox"]:checked ~ nav');
         addVariant('input-focused', 'input:focus + label');
-    }
+    },
+    require('tw-elements/dist/plugin')
   ],  
 }

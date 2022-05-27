@@ -13,8 +13,7 @@ const SignInForm = () => {
 
     const logGoogleUser = async() => {
         try{
-            const { user } = await signInWithGooglePopup();
-            const userDocRef = await createUserDoccumentFromAuth(user);
+            await signInWithGooglePopup();
         }catch(e){
             console.log(e);
         }
@@ -27,14 +26,12 @@ const SignInForm = () => {
     const handleChange = (event) => {
         const { name,value } = event.target;
         setFormFieldsSignIn({...formFieldsSignIn, [name]:value}); 
-        console.log(formFieldsSignIn);
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
-            const response = await signInUserWithEmailAndPassword(email1, password1);
-            //console.log(response);
+            const { user }  = await signInUserWithEmailAndPassword(email1, password1);
             event.target.reset(); // can't figure out why reset is needed
             resetForm();
         }catch(e){
