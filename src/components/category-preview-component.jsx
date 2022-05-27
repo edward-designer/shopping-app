@@ -7,7 +7,7 @@ const CategoryPreivew = ({ title, products}) => {
     const { addToCart } = useContext(CartContext);
 
     return (
-        <div className="flex">
+        <div className="flex relative">
             <h2 className="flex flex-1 basis-1/4 p-2 text-xl sm:text-2xl font-bold text-secondary mb-2 ml-2 border-t border-accent hover:bg-slate-100 hover:text-accent">
                 <Link className="block" to={title}>{title.toUpperCase()}</Link>
             </h2>
@@ -16,6 +16,7 @@ const CategoryPreivew = ({ title, products}) => {
                     products.filter((_,idx)=>idx<3).map((item)=><ProductCard product={item} key={item.id} addToCart={addToCart} />)
                 }
             </div>
+            <Link className="block absolute top-[40%] right-0" to={title}><button className="text-white text-2xl pt-0 w-8 h-8 bg-gray-700/80 transition-all hover:scale-150 hover:bg-accent rounded-full font-bold">▸</button></Link>
         </div>
     );
 }
