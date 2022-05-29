@@ -3,19 +3,7 @@ import { CartContext } from "../contexts/cart-context";
 import CheckOutCard from "../components/checkout-card-component";
 
 const CheckOut = () => {
-    const { productsAdded, setProductsAdded, cartTotal } = useContext(CartContext);
-
-    const changeQuantity = (product,change) => {
-        let updatedProducts = [...productsAdded];
-        const updatedInx = updatedProducts.findIndex(item => item.id === product.id);
-        if(change===0){
-            updatedProducts[updatedInx].quantity = 0;
-        }else {
-            updatedProducts[updatedInx].quantity = updatedProducts[updatedInx].quantity + change;
-        }
-        updatedProducts = updatedProducts.filter(item => item.quantity>0);
-        setProductsAdded(updatedProducts);
-    }
+    const { addToCart, productsAdded, cartTotal } = useContext(CartContext);
 
     return (
         <div className="flex flex-col flex-wrap gap-2">
@@ -30,7 +18,7 @@ const CheckOut = () => {
                 </div>
             </div>
             {productsAdded.map(product =>
-                (<CheckOutCard key={product.id} product={product} changeQuantity={changeQuantity} />)
+                (<CheckOutCard key={product.id} product={product} addToCart={addToCart} />)
             )}
             <div className="flex flex-1 justify-center border-t-2 mt-2">
                 <div className="flex-1"></div>

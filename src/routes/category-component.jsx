@@ -20,7 +20,7 @@ const Category = () => {
         <>
             <h1 className="text-4xl font-bold text-accent mb-8 ml-2"><Link to='/shop'>Shop</Link> _ {category.toUpperCase()}</h1>
             <div className="flex flex-1 flex-wrap">
-                {products&&products.map(product => <ProductCard product={product} addToCart={addToCart} key={product.id} />)}
+                {products?.map(product => <ProductCard product={product} addToCart={addToCart} key={product.id} />)}
             </div>
         </>
     )
