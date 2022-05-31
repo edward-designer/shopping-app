@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { auth, signInWithGooglePopup, createUserDoccumentFromAuth, signInUserWithEmailAndPassword } from "../utiles/firebase.utils";
 import FormInput from './form-input-component';
 import { useNavigate } from "react-router-dom";
@@ -8,7 +10,8 @@ const defaultFormFieldsSignIn = {
     password1: '',
 }
 
-const SignInForm = ({ setMessage,setShowMessage }) => {
+const SignInForm = ({ setMessage }) => {
+    const dispatch = useDispatch();
     const [formFieldsSignIn,setFormFieldsSignIn] = useState(defaultFormFieldsSignIn);
     const {email1,password1} = formFieldsSignIn;
     const navigate = useNavigate();
@@ -16,8 +19,7 @@ const SignInForm = ({ setMessage,setShowMessage }) => {
     const logGoogleUser = async() => {
         try{
             await signInWithGooglePopup();
-            setMessage('Signed in, start shopping now!');
-            setShowMessage(true);
+            dispatch(setMessage('Signed in, start shopping now!'));
             navigate("/");
         }catch(e){
             console.log(e);
@@ -39,7 +41,6 @@ const SignInForm = ({ setMessage,setShowMessage }) => {
             const { user }  = await signInUserWithEmailAndPassword(email1, password1);
             event.target.reset(); // can't figure out why reset is needed
             setMessage('Signed in, start shopping now!');
-            setShowMessage(true);
             navigate("/");
         }catch(e){
             // eslint-disable-next-line default-case

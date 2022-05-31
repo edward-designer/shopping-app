@@ -1,15 +1,21 @@
 import { useContext } from 'react';
 import { Outlet, NavLink } from "react-router-dom";
-import { UserContext } from "../contexts/user-context";
-import { signOutUser } from "../utiles/firebase.utils";
+import { useSelector, useDispatch } from 'react-redux';
+
+import { signOutUser } from "../utiles/firebase.utils"; 
 import { ReactComponent as Logo } from "../assets/crown.svg";
+
 import Message from "../components/message-component";
 import CartIcon from "./cart-icon-component";
+
 import { MessageContext } from "../contexts/message-context";
+import { selectCurrentUser } from '../store/user/user.selector';
+import { setMessage, setShowMessage } from '../store//message/message.action';
 
 const Navigation = () => {
-    const { currentUser } = useContext(UserContext);
-    const { setMessage,setShowMessage } = useContext(MessageContext);
+    const currentUser = useSelector(selectCurrentUser);
+    const dispatch = useDispatch();
+    //const { setMessage,setShowMessage } = useContext(MessageContext);
 
     return (
         <>
@@ -31,7 +37,7 @@ const Navigation = () => {
                     <NavLink to='/shop' className="hover:text-accent">Shop</NavLink>
                     {
                         currentUser? (
-                            <span onClick={()=>{signOutUser();setMessage('Signed out already. See you soon!');setShowMessage(true);}} className="cursor-pointer whitespace-nowrap hover:text-accent">Sign Out</span>
+                            <span onClick={()=>{signOutUser();dispatch(setMessage('Signed out already. See you soon!'));dispatch(setShowMessage(true));}} className="cursor-pointer whitespace-nowrap hover:text-accent">Sign Out</span>
                         ):(
                             <NavLink to='/signIn' className="hover:text-accent">Sign In</NavLink>  
                         )

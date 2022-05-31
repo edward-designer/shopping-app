@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { createAuthUserWithEmailAndPassword,createUserDoccumentFromAuth } from '../utiles/firebase.utils';
 import FormInput from './form-input-component';
 import { useNavigate } from "react-router-dom";
@@ -10,7 +11,8 @@ const defaultFormFields = {
     confirmPassword: ''
 }
 
-const SignUpForm = ({ setMessage,setShowMessage }) => {
+const SignUpForm = ({ setMessage }) => {
+    const dispatch = useDispatch();
     const [formFields,setFormFields] = useState(defaultFormFields);
     const {displayName,email,password,confirmPassword} = formFields;
     const navigate = useNavigate();
@@ -31,8 +33,7 @@ const SignUpForm = ({ setMessage,setShowMessage }) => {
         try{
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
             const userDocRef = await createUserDoccumentFromAuth(user,{displayName});
-            setMessage('Great! You are in. Start shopping now!');
-            setShowMessage(true);
+            dispatch(setMessage('Great! You are in. Start shopping now!'));
             event.target.reset();
             resetForm();
             navigate("/");

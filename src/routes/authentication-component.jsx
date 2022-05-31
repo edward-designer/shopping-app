@@ -1,4 +1,6 @@
 import { useContext, useEffect } from 'react';
+
+import { setMessage } from '../store/message/message.action';
 //import { getRedirectResult } from 'firebase/auth';
 import SignUpForm from "../components/sign-up-form-component";
 import SignInForm from "../components/sign-in-form-component";
@@ -10,12 +12,12 @@ const Authentication = () => {
         console.log(response);
         } fetchResult();
     },[]);*/
-    const { setMessage,setShowMessage } = useContext(MessageContext);
+    //const { setMessage,setShowMessage } = useContext(MessageContext);
 
     return (
         <div className="flex flex-wrap justify-around ">
-            <SignInForm setMessage={setMessage} setShowMessage={setShowMessage} />
-            <SignUpForm setMessage={setMessage} setShowMessage={setShowMessage} />
+            <SignInForm setMessage={setMessage} />
+            <SignUpForm setMessage={setMessage} />
         </div>
     );
 }

@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect, useReducer } from 'react';
+import { useDispatch } from 'react-redux';
 import { MessageContext } from '../contexts/message-context';
+import { setMessage,setShowMessage } from '../store/message/message.action';
 
 // data storage
 export const CartContext = createContext({
@@ -42,8 +44,7 @@ const INITIAL_STATE = {
 }
 
 export const CartProvider = ({ children }) => {
-    const {setMessage, setShowMessage} = useContext(MessageContext);
-       
+    const reduxDispatch = useDispatch();
     const [{ isCartOpen, cartTotal, cartQuantity, productsAdded }, dispatch] = useReducer(cartReducer,INITIAL_STATE);
     const setIsCartOpen = (cartOpen) => {
         dispatch({type: USER_ACTION_TYPES.SET_IS_CART_OPEN, payload:cartOpen })
@@ -77,9 +78,8 @@ export const CartProvider = ({ children }) => {
         updatedProducts = updatedProducts.filter(item => item.quantity>0);
         window.localStorage.setItem('productsAdded', JSON.stringify(updatedProducts));
         setProductsAdded(updatedCartReducer(updatedProducts));       
-        if(quantity>0){setMessage("Item Successfully Added!");}
-        else{setMessage("Item Successfully Removed.");}
-        setShowMessage(true);
+        if(quantity>0){reduxDispatch(setMessage("Item Successfully Added!"));}
+        else{reduxDispatch(setMessage("Item Successfully Removed."));}
     }
 
     useEffect(() => {

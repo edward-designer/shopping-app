@@ -1,9 +1,13 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { CartContext } from "../contexts/cart-context";
+
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
 import CheckOutCard from "../components/checkout-card-component";
 
 const CheckOut = () => {
     const { addToCart, productsAdded, cartTotal } = useContext(CartContext);
+    const [parent] = useAutoAnimate();
 
     return (
         <div className="flex flex-col flex-wrap gap-2">
@@ -17,9 +21,11 @@ const CheckOut = () => {
                     <div className="w-8"></div>
                 </div>
             </div>
+            <div  ref={parent}>
             {productsAdded.map(product =>
                 (<CheckOutCard key={product.id} product={product} addToCart={addToCart} />)
             )}
+            </div>
             <div className="flex flex-1 justify-center border-t-2 mt-2">
                 <div className="flex-1"></div>
                 <div className="w-20 font-bold">Total:</div>
