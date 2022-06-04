@@ -1,10 +1,13 @@
-import { useContext } from 'react'; 
+import { useSelector, useDispatch } from 'react-redux';
+import { selectProductsAdded } from '../store/cart/cart.selector';
+import { setProductsAdded } from '../store/cart/cart.action';
+
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/product-card-component';
-import { CartContext } from '../contexts/cart-context';
+//import { CartContext } from '../contexts/cart-context';
 
-const CategoryPreivew = ({ title, products}) => {
-    const { addToCart } = useContext(CartContext);
+const CategoryPreivew = ({ title, products, addToCart}) => {
+    //const { addToCart } = useContext(CartContext);
 
     return (
         <div className="flex relative">

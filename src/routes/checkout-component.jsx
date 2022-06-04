@@ -1,12 +1,17 @@
-import { useContext, useRef } from "react";
-import { CartContext } from "../contexts/cart-context";
+import { useRef } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+
+import { addToCart } from '../store/cart/cart.action';
+import { selectProductsAdded, selectCartTotal, selectCartQuantity } from '../store/cart/cart.selector';
 
 import CheckOutCard from "../components/checkout-card-component";
 
 const CheckOut = () => {
-    const { addToCart, productsAdded, cartTotal } = useContext(CartContext);
+
+    const productsAdded = useSelector(selectProductsAdded);
+    const cartTotal = useSelector(selectCartTotal);
     const [parent] = useAutoAnimate();
 
     return (
@@ -21,9 +26,9 @@ const CheckOut = () => {
                     <div className="w-8"></div>
                 </div>
             </div>
-            <div  ref={parent}>
+            <div ref={parent}>
             {productsAdded.map(product =>
-                (<CheckOutCard key={product.id} product={product} addToCart={addToCart} />)
+                (<CheckOutCard key={product.id} product={product} addToCart={addToCart(productsAdded)} />)
             )}
             </div>
             <div className="flex flex-1 justify-center border-t-2 mt-2">

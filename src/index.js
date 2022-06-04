@@ -4,11 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 
-import { UserProvider } from './contexts/user-context'
-import { CategoriesProvider } from './contexts/categories-context'
-import { CartProvider } from './contexts/cart-context'
-import { MessageProvider } from './contexts/message-context'
-
 import 'tw-elements';
 
 import './index.css';
@@ -21,11 +16,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <MessageProvider>
-            <CartProvider>     
-                <App /> 
-            </CartProvider>
-        </MessageProvider>
+        <App /> 
       </BrowserRouter>
     </Provider>  
   </React.StrictMode>

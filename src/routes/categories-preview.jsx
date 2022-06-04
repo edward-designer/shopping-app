@@ -4,7 +4,7 @@ import { selectCategoriesMap } from '../store/categories/categories.selector';
 
 import CategoryPreivew from '../components/category-preview-component';
 
-const CategoriesPreivew = () => {
+const CategoriesPreivew = ({addToCart}) => {
     const categoriesMap = useSelector(selectCategoriesMap);
 
     return (
@@ -13,7 +13,7 @@ const CategoriesPreivew = () => {
                 { 
                     Object.keys(categoriesMap).map( title => {
                         const products = categoriesMap[title];
-                        return <CategoryPreivew key={title} title={title} products={products} />
+                        return <CategoryPreivew key={title} title={title} products={products} addToCart={addToCart} />
                         
                     })
                 } 

@@ -1,7 +1,10 @@
-import { useContext, useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setIsCartOpen } from '../store/cart/cart.action';
+import { selectIsCartOpen, selectProductsAdded, selectCartTotal, selectCartQuantity } from '../store/cart/cart.selector';
 import { ReactComponent as Cart } from '../assets/shopping-bag.svg';
 import CartDropDown from "./cart-dropdown-component";
-import { CartContext } from "../contexts/cart-context";
 
 // click outside to close
 const useAutoClose = ({ setIsCartOpen, item }) => {
@@ -22,8 +25,11 @@ const useAutoClose = ({ setIsCartOpen, item }) => {
   }
 
 const CartIcon = () => {
-    const {isCartOpen,setIsCartOpen,productsAdded,setProductsAdded,cartQuantity } = useContext(CartContext);
-
+  const dispatch = useDispatch();  
+  const isCartOpen = useSelector(selectIsCartOpen);
+  const productsAdded = useSelector(selectProductsAdded);
+  const cartTotal = useSelector(selectCartTotal);
+  const cartQuantity = useSelector(selectCartQuantity);
     const item = useRef();
     item.current = document.getElementById('cartDropdown');
     
@@ -31,7 +37,7 @@ const CartIcon = () => {
 
     const toggleCart = (event) =>{
         event.stopPropagation();
-        setIsCartOpen(!isCartOpen);
+        dispatch(setIsCartOpen(!isCartOpen));
     }
 
     return (

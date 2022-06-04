@@ -8,12 +8,12 @@ import ProductCard from '../components/product-card-component'
 
 import { CartContext } from '../contexts/cart-context'
 
-const Category = () => {
+const Category = ({addToCart}) => {
     const { category } = useParams();
     const categoriesMap = useSelector(selectCategoriesMap);
     const products = categoriesMap[category];
 
-    const { addToCart } = useContext(CartContext);
+    //const { addToCart } = useContext(CartContext);
     
     return (
         <>
