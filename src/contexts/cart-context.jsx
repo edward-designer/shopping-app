@@ -76,16 +76,16 @@ export const CartProvider = ({ children }) => {
             updatedProducts = [...productsAdded,{...product,quantity:1}];
         }
         updatedProducts = updatedProducts.filter(item => item.quantity>0);
-        window.localStorage.setItem('productsAdded', JSON.stringify(updatedProducts));
+        //window.localStorage.setItem('productsAdded', JSON.stringify(updatedProducts));
         setProductsAdded(updatedCartReducer(updatedProducts));       
         if(quantity>0){reduxDispatch(setMessage("Item Successfully Added!"));}
         else{reduxDispatch(setMessage("Item Successfully Removed."));}
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         setProductsAdded(updatedCartReducer(JSON.parse(window.localStorage.getItem('productsAdded'))));
     }, []); 
-
+    */
     const value = {addToCart, isCartOpen, setIsCartOpen, productsAdded, setProductsAdded, cartTotal, cartQuantity};
  
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>

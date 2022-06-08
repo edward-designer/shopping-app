@@ -19,7 +19,7 @@ export const addToCart = (productsAdded) => (product,quantity=1) =>{
         updatedProducts = [...productsAdded,{...product,quantity:1}];
     }
     updatedProducts = updatedProducts.filter(item => item.quantity>0);
-    window.localStorage.setItem('productsAdded', JSON.stringify(updatedProducts));
+    //window.localStorage.setItem('productsAdded', JSON.stringify(updatedProducts));
 
     return ({type: CART_ACTION_TYPES.SET_PRODUCTS_ADDED, payload: updatedProducts});       
 }

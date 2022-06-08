@@ -22,10 +22,10 @@ const CartDropDown = () => {
       dispatch(setIsCartOpen(false));
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(setProductsAdded(JSON.parse(window.localStorage.getItem('productsAdded'))));
     }, []); 
-
+    */
     return (
         <div className={"w-80 absolute top-20 right-0 flex flex-col " + (isCartOpen ? 'visible' : 'hidden')} id="cartDropdown">
             <div className="max-h-[80vh] overflow-scroll p-4 bg-white/[.9] border transition-all min-h-80">   

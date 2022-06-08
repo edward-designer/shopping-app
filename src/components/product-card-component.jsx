@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 const ProductCard = ({product,addToCart}) => {
     const {imageUrl, name, price} = product;
     const dispatch = useDispatch();
+    
     return (
         <div className="group flex flex-0 flex-row justify-center flex-wrap basis-1/2 sm:basis-1/3 p-2 overflow-hidden relative mb-8">
             <img className="group-hover:opacity-80 transition-all flex-auto w-full h-60 object-cover lg:h-80" src={imageUrl} alt={name} />
